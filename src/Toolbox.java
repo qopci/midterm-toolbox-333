@@ -1,5 +1,7 @@
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Toolbox {
 
@@ -14,7 +16,14 @@ public class Toolbox {
     if (array == null || index < 0 || index >= array.length) {
       throw new IllegalArgumentException("Array cannot be null and index must be within bounds.");
     }
+
+    for (int i = index; i < array.length - 1; i++) {
+      // move the element at the next position to the current position
+      array[i] = array[i + 1];
+    }
     
+    // setting the last element to null
+    array[array.length - 1] = null;
   }
 
   /**
@@ -29,7 +38,14 @@ public class Toolbox {
     if (array == null || index < 0 || index >= array.length) {
       throw new IllegalArgumentException("Array cannot be null and index must be within bounds.");
     }
+
+    for (int i = array.length - 1; i > index; i--) {
+      // shift each element one position to the right
+      array[i] = array[i - 1];
+    }
     
+    // inserting the new value at the specified index
+    array[index] = value;
   }
 
   /**
@@ -43,7 +59,13 @@ public class Toolbox {
     if (head == null) {
       throw new IllegalArgumentException("Head cannot be null.");
     }
-    return null; 
+
+    // starting with the head of the singly linked list
+    while (head.next != null) {
+      head = head.next;  // move the 'head' pointer to the next node in the list
+    }
+
+    return head;
   }
 
   /**
@@ -57,7 +79,13 @@ public class Toolbox {
     if (tail == null) {
       throw new IllegalArgumentException("Tail cannot be null.");
     }
-    return null; 
+
+    // traverse the list backwards using the 'prev' reference
+    while (tail.prev != null) {
+      tail = tail.prev; // moving to the previous node in the list
+    }
+
+    return tail;
   }
 
   /**
@@ -71,7 +99,23 @@ public class Toolbox {
     if (head == null) {
       throw new IllegalArgumentException("Head cannot be null.");
     }
-    return null; 
+
+    // creating a HashMap to store the count of each value in the linked list
+    Map<Integer, Integer> map = new HashMap<>();
+    
+    // traversing the linked list until the end (head is null)
+    while (head != null) {
+        // get the current value (head.value) and update its count in the map
+        // map.getOrDefault() retrieves the current count, or 0 if not found
+        // then increment the count by 1 and put it back in the map
+        map.put(head.data, map.getOrDefault(head.data, 0) + 1); 
+
+        // move to the next node in the linked list
+        head = head.next;
+    }
+    
+    // return the map containing the counts of all values in the linked list
+    return map;
   }
 
   /**
@@ -85,6 +129,15 @@ public class Toolbox {
       throw new IllegalArgumentException("Node cannot be null.");
     }
     
+     // update the previous node's next reference, if any
+    if (node.prev != null) {
+      node.prev.next = node.next;
+    }
+
+    // update the next node's previous reference, if any
+    if (node.next != null) {
+      node.next.prev = node.prev;
+    }
   }
 
   /**
@@ -99,7 +152,15 @@ public class Toolbox {
     if (head == null || n < 0) {
       throw new IllegalArgumentException("Head cannot be null and n cannot be negative.");
     }
-    return null; 
+
+    // traverse the list until we reach the nth element
+    while (n > 0 && head != null) {
+      head = head.next; // move to the next node
+      n--; // decrease the index
+    }
+
+    // return the nth node, or null if out of bounds
+    return head;
   }
 
   /**
@@ -114,6 +175,9 @@ public class Toolbox {
       throw new IllegalArgumentException("Node and newNode cannot be null.");
     }
 
+    // insert newNode after node
+    newNode.next = node.next; // set newNode's next to node's next
+    node.next = newNode; // set node's next to newNode, inserting it into the list
   }
 
   /**
@@ -134,6 +198,12 @@ public class Toolbox {
       throw new IllegalArgumentException("Queue cannot be null and k cannot be negative.");
     }
     
+    // rotate the queue k times
+    for (int i = 0; i < k; i++) {
+      // remove the first element and add it to the end of the queue
+      Integer temp = queue.poll(); // poll removes the head of the queue
+      queue.offer(temp); // offer adds the element to the end of the queue
+    }
   }
 
   /**
@@ -155,9 +225,29 @@ public class Toolbox {
     if (input == null) {
       throw new IllegalArgumentException("Input string cannot be null.");
     }
-    return false;
-  }
 
-  
+    // creating a stack to store opening parentheses
+    Stack<Character> stack = new Stack<>();
+
+    // loop through each character in the string
+    for (char ch : input.toCharArray()) {
+      // if the character is an opening parenthesis, push it onto the stack
+      if (ch == '(') {
+        stack.push(ch);
+      }
+      // if the character is a closing parenthesis, check the stack
+      else if (ch == ')') {
+        // If the stack is empty, we have a mismatch (no opening parenthesis)
+        if (stack.isEmpty()) {
+          return false;
+        }
+        // pop the matching opening parenthesis from the stack
+        stack.pop();
+      }
+    }
+
+    // If the stack is empty, the parentheses are balanced; otherwise, they are not
+    return stack.isEmpty();
+  }
 
 }
