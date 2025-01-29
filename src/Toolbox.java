@@ -12,6 +12,8 @@ public class Toolbox {
    * @param index the index of the element to remove
    * @throws IllegalArgumentException if the array is null or the index is out of bounds
    */
+  // Time Complexity: O(N)
+  // Space Complexity: O(1)
   public static void removeElementInPlace(String[] array, int index) {
     if (array == null || index < 0 || index >= array.length) {
       throw new IllegalArgumentException("Array cannot be null and index must be within bounds.");
@@ -34,6 +36,8 @@ public class Toolbox {
    * @param value the value to add
    * @throws IllegalArgumentException if the array is null or the index is out of bounds
    */
+  // Time Complexity: O(N)
+  // Space Complexity: O(1)
   public static void addElementInPlace(String[] array, int index, String value) {
     if (array == null || index < 0 || index >= array.length) {
       throw new IllegalArgumentException("Array cannot be null and index must be within bounds.");
@@ -55,6 +59,8 @@ public class Toolbox {
    * @return the tail node of the list, or null if the list is empty
    * @throws IllegalArgumentException if the head is null
    */
+  // Time Complexity: O(N)
+  // Space Complexity: O(1)
   public static SingleNode findTail(SingleNode head) {
     if (head == null) {
       throw new IllegalArgumentException("Head cannot be null.");
@@ -75,6 +81,8 @@ public class Toolbox {
    * @return the head node of the list, or null if the list is empty
    * @throws IllegalArgumentException if the tail is null
    */
+  // Time Complexity: O(N)
+  // Space Complexity: O(1)
   public static DoubleNode findHead(DoubleNode tail) {
     if (tail == null) {
       throw new IllegalArgumentException("Tail cannot be null.");
@@ -95,6 +103,8 @@ public class Toolbox {
    * @return a map where the keys are the values in the list, and the values are the counts of occurrences
    * @throws IllegalArgumentException if the head is null
    */
+  // Time Complexity: O(N)
+  // Space Complexity: O(N)
   public static Map<Integer, Integer> countOccurrences(SingleNode head) {
     if (head == null) {
       throw new IllegalArgumentException("Head cannot be null.");
@@ -124,6 +134,8 @@ public class Toolbox {
    * @param node the node to remove
    * @throws IllegalArgumentException if the node is null
    */
+  // Time Complexity: O(1)
+  // Space Complexity: O(1)
   public static void removeNode(DoubleNode node) {
     if (node == null) {
       throw new IllegalArgumentException("Node cannot be null.");
@@ -148,6 +160,8 @@ public class Toolbox {
    * @return the nth node, or null if the index is out of bounds
    * @throws IllegalArgumentException if the head is null or n is negative
    */
+  // Time Complexity: O(N)
+  // Space Complexity: O(1)
   public static SingleNode findNthElement(SingleNode head, int n) {
     if (head == null || n < 0) {
       throw new IllegalArgumentException("Head cannot be null and n cannot be negative.");
@@ -170,6 +184,8 @@ public class Toolbox {
    * @param newNode the new node to insert
    * @throws IllegalArgumentException if either node or newNode is null
    */
+  // Time Complexity: O(1)
+  // Space Complexity: O(1)
   public static void insertNode(SingleNode node, SingleNode newNode) {
     if (node == null || newNode == null) {
       throw new IllegalArgumentException("Node and newNode cannot be null.");
@@ -193,6 +209,8 @@ public class Toolbox {
    * @param k the number of positions to rotate to the left
    * @throws IllegalArgumentException if the queue is null or k is negative
    */
+  // Time Complexity: O(N)
+  // Space Complexity: O(1)
   public static void rotateQueueLeft(Queue<Integer> queue, int k) {
     if (queue == null || k < 0) {
       throw new IllegalArgumentException("Queue cannot be null and k cannot be negative.");
@@ -221,6 +239,8 @@ public class Toolbox {
    * @return true if the string has balanced parentheses, false otherwise
    * @throws IllegalArgumentException if the input string is null
    */
+  // Time Complexity: O(N)
+  // Space Complexity: O(N)
   public static boolean hasBalancedParentheses(String input) {
     if (input == null) {
       throw new IllegalArgumentException("Input string cannot be null.");
